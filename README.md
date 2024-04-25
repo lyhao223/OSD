@@ -1,23 +1,34 @@
-# OSD Blog
+# OSD
 
-Welcome to my workspace!
+## Project Folder: traffic-sign
 
-In this blog, I will be sharing my experiences and insights about working in the field of OSD (Operating System Development). As a software developer, I have always been fascinated by the intricate details of how operating systems work and how they interact with hardware.
+This project focuses on traffic sign recognition using machine learning techniques.
 
-Throughout this blog, I will cover various topics related to OSD, including:
+### Language
 
-- Introduction to operating system development
-- Kernel architecture and design principles
-- Memory management and virtual memory
-- Process scheduling and synchronization
-- Device drivers and hardware interaction
-- File systems and storage management
-- Debugging and performance optimization techniques
+The project is implemented in Python.
 
-I hope that this blog will serve as a valuable resource for fellow developers interested in OSD. Whether you are a beginner looking to get started or an experienced developer seeking to deepen your knowledge, I believe you will find something useful here.
+### Training Model
 
-So, let's dive into the fascinating world of OSD together!
+The project utilizes a Convolutional Neural Network (CNN) for traffic sign recognition. CNNs are well-suited for image classification tasks.
 
-Stay tuned for the first blog post coming soon.
+### Libraries and Frameworks
 
-Happy coding!
+The project makes use of the following libraries and frameworks:
+
+- TensorFlow: A popular deep learning framework for building and training neural networks.
+- OpenCV: A computer vision library used for image processing and manipulation.
+- Scikit-learn: A machine learning library that provides various algorithms and tools for data analysis.
+- NumPy: A library for numerical computing in Python.
+- Matplotlib: A plotting library for creating visualizations in Python.
+
+### Data
+
+The project uses a dataset of traffic sign images. The dataset consists of thousands of labeled images representing different types of traffic signs.
+
+### Tools
+
+In addition to the aforementioned libraries and frameworks, the project also utilizes the following tools:
+
+- Jupyter Notebook: An interactive development environment for running code and visualizing data.
+- Anaconda: A Python distribution that includes many pre-installed libraries and tools for scientific computing.
