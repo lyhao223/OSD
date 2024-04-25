@@ -51,3 +51,24 @@ The project makes use of the following libraries and frameworks:
 ### Data
 
 The project uses a dataset of face images. The dataset consists of thousands of labeled images representing different individuals.
+
+## Project Folder: my-app-ai
+
+This project focuses on developing website to call API with model trainned by face_classification & traffic-sign.
+
+### Language
+
+The project is implemented in Reactjs, Typescript, Tailwind Css, Vitejs.
+
+### Features
+
+The project includes the following features:
+
+- Recognizing traffic signs with image.
+- Identify real-time facial expressions on Webcam.
+
+### Deployment
+
+The application can be deployed on various platforms, including web, mobile, and desktop.
+
+$END$
