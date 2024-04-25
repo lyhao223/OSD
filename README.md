@@ -71,4 +71,31 @@ The project includes the following features:
 
 The application can be deployed on various platforms, including web, mobile, and desktop.
 
+## How to run the Image Recognition Web application through the CNN model
+
+The steps are as follows:
+
+- Run file requirements in traffic-sign and face_classification with
+
+  ```
+  pip install -r requirements.txt
+  ```
+
+- Then go to my-app-ai and run with
+  ```
+  npm install
+  ```
+- Then go back traffic-sign and run api with:
+  ```
+  python gui.py
+  ```
+- Then go to face-classification and run api with:
+  ```
+  python app.py
+  ```
+- Then go back my-app-ai and run with:
+  ```
+  npm run dev
+  ```
+
 $END$
