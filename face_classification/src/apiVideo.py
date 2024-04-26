@@ -1,4 +1,5 @@
 from flask import Flask, request, Response
+from flask_cors import CORS
 from keras.models import load_model
 from utils.datasets import get_labels
 from utils.inference import detect_faces, apply_offsets, load_detection_model
@@ -8,7 +9,7 @@ import cv2
 import json
 
 app = Flask(__name__)
-
+CORS(app)
 # parameters for loading data and images
 detection_model_path = '../trained_models/detection_models/haarcascade_frontalface_default.xml'
 emotion_model_path = '../trained_models/emotion_models/fer2013_mini_XCEPTION.110-0.65.hdf5'
@@ -24,7 +25,7 @@ emotion_classifier = load_model(emotion_model_path, compile=False)
 # getting input model shapes for inference
 emotion_target_size = emotion_classifier.input_shape[1:3]
 
-@app.route('/predict', methods=['POST'])
+@app.route('/videoEmotion', methods=['POST'])
 def predict():
     if request.method == 'POST':
         file = request.files['file']
@@ -52,4 +53,4 @@ def predict():
     return Response(response="method not allowed", status=405)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='localhost', port=5173)

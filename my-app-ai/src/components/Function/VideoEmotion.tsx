@@ -1,6 +1,5 @@
 import React, { useRef, useCallback } from 'react';
 import Webcam from "react-webcam";
-import axios from 'axios';
 
 interface IWebcam extends Webcam {
   getScreenshot: () => string;
@@ -9,21 +8,28 @@ interface IWebcam extends Webcam {
 const WebcamCapture: React.FC = () => {
   const webcamRef = useRef<IWebcam | null>(null);
 
-  const capture = useCallback(
-    () => {
-      if (webcamRef.current) {
-        const imageSrc = webcamRef.current.getScreenshot();
-        axios.post('http://localhost:5000/apiVideo', { image: imageSrc })
-          .then(response => {
-            console.log(response.data);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }
-    },
-    [webcamRef]
-  );
+const capture = useCallback(
+  () => {
+    if (webcamRef.current) {
+      const imageSrc = webcamRef.current.getScreenshot();
+      fetch('http://localhost:5000/apiVideo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ image: imageSrc })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    }
+  },
+  [webcamRef]
+);
 
   return (
     <>
