@@ -5,7 +5,7 @@ import { Header } from './components/Header/Header'
 import Homepage from './components/Home/Homepage'
 import Technology from './components/Technology/Technology'
 import TrafficSignClassification from './components/Function/TrafficSign'
-
+import VideoEmotion from './components/Function/VideoEmotion'
 function App() {
 
   return (
@@ -16,6 +16,7 @@ function App() {
     <Homepage />
     <Technology />
     <TrafficSignClassification />
+    <VideoEmotion />
     </Fragment>
     
   )
