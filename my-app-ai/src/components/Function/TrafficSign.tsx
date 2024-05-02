@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 import { FaImage } from "react-icons/fa";
+import Title from "../Reuseable/Title";
+import Input from "../Reuseable/Input";
+import Label from "../Reuseable/Label";
+import Button from "../Reuseable/Button";
+import Result from "../Reuseable/Result";
+import Image from "../Reuseable/Image";
 
 const TrafficSignClassification: React.FC = () => {
   const [image, setImage] = useState<string | null>(null);
@@ -15,10 +21,13 @@ const TrafficSignClassification: React.FC = () => {
       const formData = new FormData();
       formData.append("file", file);
       try {
-        const response = await fetch("http://127.0.0.1:5000/predict", {
-          method: "POST",
-          body: formData,
-        });
+        const response = await fetch(
+          "http://127.0.0.1:5001/detectionTrafficSign",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
 
         if (response.ok) {
           const responseData = await response.json();
@@ -40,52 +49,32 @@ const TrafficSignClassification: React.FC = () => {
   const handleClear = () => {
     setImage(null);
     setClassification(null);
+    setIsLoading(false); // Clear image state
   };
 
   return (
-    <div>
-      <h1 className="w-fit text-white px-5 py-3 text-4xl font-merriweather font-normal border rounded-3xl border-violet-800 bg-violet-800 mx-auto mb-12">
-        Know Your Traffic Sign
-      </h1>
-      <div className="mb-10 w-full">
-        <input
-          type="file"
-          onChange={handleUpload}
-          accept="image/*"
-          id="upload-img"
-          style={{ display: "none" }}
-        />
-        <label
-          htmlFor="upload-img"
-          className="bg-violet-900 font-merriweather leading-6 text-white px-5 py-3 rounded-2xl text-3xl cursor-pointer shadow-lg duration-200 hover:shadow-violet-500">
-          <FaImage className="inline-block mr-3" />
-          Upload Image
-        </label>
+    <section id="Function" className="min-h-[700px] p-7">
+      <Title text="Traffic Sign Classification" />
+      <div className="mb-10 w-full flex flex-row items-center space-y-4 justify-center md:flex-row ">
+        <Input handleUpload={handleUpload} id="upload-image" />
+        <Label htmlFor="upload-image" />
         {image && (
-          <button
+          <Button
             onClick={handleClear}
-            className="bg-red-500 text-white font-merriweather px-5 py-3 rounded-2xl text-3xl cursor-pointer shadow-lg duration-200 hover:shadow-red-700 ml-5">
+            classesBG="bg-red-500"
+            classesHV="hover:shadow-red-700">
             Clear
-          </button>
+          </Button>
         )}
       </div>
-      {image && (
-        <img
-          src={image}
-          alt="Uploaded"
-          className="mx-auto w-96 h-96 rounded-2xl shadow-2xl mb-10"
-        />
-      )}
+
+      {image && <Image src={image} />}
       {isLoading ? (
         <p className="text-2xl leading-6 font-merriweather mb-12">Loading...</p>
       ) : (
-        classification && (
-          <p className="text-2xl leading-6 font-merriweather mb-12 text-violet-400">
-            Result: {classification}
-          </p>
-        )
+        classification && <Result>{classification}</Result>
       )}
-    </div>
+    </section>
   );
 };
 

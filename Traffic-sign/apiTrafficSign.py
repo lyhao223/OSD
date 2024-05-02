@@ -54,7 +54,7 @@ classes = { 1:'Speed limit (20km/h)',
            42:'End of no passing',      
            43:'End no passing veh > 3.5 tons' }  # Copy your classes dictionary here
 
-@app.route('/predict', methods=['POST','GET'])
+@app.route('/detectionTrafficSign', methods=['POST','GET'])
 def predict():
     file = request.files['file']
     image = Image.open(file.stream)  # Open the image file
@@ -67,4 +67,4 @@ def predict():
     return jsonify({'Sign': sign})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='127.0.0.1',port=5001,debug=True)
