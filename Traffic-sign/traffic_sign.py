@@ -1,16 +1,11 @@
 import numpy as np
-import pandas as pd
-import cv2
-import tensorflow as tf
 from PIL import Image
 import os
 from sklearn.model_selection import train_test_split
 from keras.utils import to_categorical
-from keras.models import Sequential, load_model
+from keras.models import Sequential
 from keras.layers import Conv2D, MaxPool2D, Dense, Flatten, Dropout
-from sklearn.metrics import accuracy_score
 
-import matplotlib.pyplot as plt
 
 # Set up the data and labels
 data = []
@@ -69,43 +64,3 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 epochs = 15
 history = model.fit(X_train, y_train, batch_size=32, epochs=epochs, validation_data=(X_test, y_test))
 model.save("my_model.h5")
-
-# Plot accuracy and loss graphs
-plt.figure(0)
-plt.plot(history.history['accuracy'], label='training accuracy')
-plt.plot(history.history['val_accuracy'], label='val accuracy')
-plt.title('Accuracy')
-plt.xlabel('epochs')
-plt.ylabel('accuracy')
-plt.legend()
-plt.show()
-
-plt.figure(1)
-plt.plot(history.history['loss'], label='training loss')
-plt.plot(history.history['val_loss'], label='val loss')
-plt.title('Loss')
-plt.xlabel('epochs')
-plt.ylabel('loss')
-plt.legend()
-plt.show()
-
-# Load the test dataset
-test_data = pd.read_csv('Test.csv')
-labels = test_data["ClassId"].values
-imgs = test_data["Path"].values
-
-# Prepare the test data
-data = []
-for img in imgs:
-    image = Image.open(img)
-    image = image.resize((30, 30))
-    data.append(np.array(image))
-
-X_test = np.array(data)
-
-# Make predictions on the test data
-pred = model.predict(X_test)
-pred_classes = np.argmax(pred, axis=1)
-
-# Calculate accuracy with the test data
-print(accuracy_score(labels, pred_classes))
