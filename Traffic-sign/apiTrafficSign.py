@@ -52,7 +52,7 @@ classes = { 1:'Speed limit (20km/h)',
            40:'Keep left',      
            41:'Roundabout mandatory',     
            42:'End of no passing',      
-           43:'End no passing veh > 3.5 tons' }  # Copy your classes dictionary here
+           43:'End no passing veh > 3.5 tons' } 
 
 @app.route('/detectionTrafficSign', methods=['POST','GET'])
 def predict():
