@@ -16,7 +16,7 @@ emotion_labels = get_labels('fer2013')
 
 # hyper-parameters for bounding boxes shape
 frame_window = 10
-emotion_offsets = (80, 120)
+emotion_offsets = (20, 40)
 
 # loading models
 face_detection = load_detection_model(detection_model_path)

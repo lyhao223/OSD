@@ -1,10 +1,4 @@
-"""
-File: train_emotion_classifier.py
-Author: Octavio Arriaga
-Email: arriaga.camargo@gmail.com
-Github: https://github.com/oarriaga
-Description: Train emotion classification model
-"""
+
 
 from keras.callbacks import CSVLogger, ModelCheckpoint, EarlyStopping
 from keras.callbacks import ReduceLROnPlateau
@@ -47,8 +41,6 @@ for dataset_name in datasets:
     print('Training dataset:', dataset_name)
 
     # callbacks
-    log_file_path = base_path + dataset_name + '_emotion_training.log'
-    csv_logger = CSVLogger(log_file_path, append=False)
     early_stop = EarlyStopping('val_loss', patience=patience)
     reduce_lr = ReduceLROnPlateau('val_loss', factor=0.1,
                                   patience=int(patience/4), verbose=1)
@@ -56,7 +48,7 @@ for dataset_name in datasets:
     model_names = trained_models_path + '.{epoch:02d}-{val_accuracy:.2f}.hdf5'
     model_checkpoint = ModelCheckpoint(model_names, 'val_loss', verbose=1,
                                                     save_best_only=True)
-    callbacks = [model_checkpoint, csv_logger, early_stop, reduce_lr]
+    callbacks = [model_checkpoint, early_stop, reduce_lr]
 
     # loading dataset
     data_loader = DataManager(dataset_name, image_size=input_shape[:2])

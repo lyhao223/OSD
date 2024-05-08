@@ -3,7 +3,7 @@ from keras.models import load_model
 import numpy as np
 import cv2
 from utils.datasets import get_labels
-from utils.inference import detect_faces, draw_text, draw_bounding_box, apply_offsets, load_detection_model
+from utils.inference import detect_faces, apply_offsets, load_detection_model
 from utils.preprocessor import preprocess_input
 
 app = Flask(__name__)
@@ -14,7 +14,6 @@ emotion_model_path = '../trained_models/emotion_models/fer2013_mini_XCEPTION.110
 emotion_labels = get_labels('fer2013')
 
 # hyper-parameters for bounding boxes shape
-frame_window = 10
 emotion_offsets = (20, 40)
 
 # loading models
@@ -46,7 +45,6 @@ def emotion():
         gray_face = np.expand_dims(gray_face, 0)
         gray_face = np.expand_dims(gray_face, -1)
         emotion_prediction = emotion_classifier.predict(gray_face)
-        emotion_probability = np.max(emotion_prediction)
         emotion_label_arg = np.argmax(emotion_prediction)
         emotion_text = emotion_labels[emotion_label_arg]
 
